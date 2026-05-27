@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/buttonStyle.uss?fileID=7433441132597879392&amp;guid=74303e0a490f6d54f9d85ec794a3b360&amp;type=3#buttonStyle"/>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:Label text="Pick Colour" style="height: 100px; -unity-font-style: bold; -unity-text-align: middle-center; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 1px; color: rgb(255, 255, 255); font-size: 44px;"/>
+            <ui:Button text="Green?" style="height: 84px; justify-content: center; margin-top: 10px; margin-bottom: 10px; font-size: 80px; color: rgb(255, 250, 250); background-color: rgb(0, 255, 0); -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0);"/>
+            <ui:Button text="Red" style="height: 84px; margin-bottom: 10px; margin-top: 10px; background-color: rgb(255, 0, 0); font-size: 80px; color: rgb(255, 250, 250); -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0);"/>
+            <ui:Button text="Blue!" style="height: 84px; align-items: auto; justify-content: flex-end; align-self: auto; align-content: auto; margin-bottom: 10px; margin-top: 10px; color: rgb(255, 255, 255); font-size: 80px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 2px; background-color: rgb(0, 0, 255);"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
