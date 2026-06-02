@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 /// <summary>
 /// Play a simple sounds using Play one shot with volume, and pitch
@@ -32,6 +32,11 @@ public class PlayQuickSound : MonoBehaviour
         audioSource.pitch = randomVariance;
         audioSource.PlayOneShot(sound, volume);
         audioSource.pitch = defaultPitch;
+    }
+
+    public void PlayXRI(UnityEngine.XR.Interaction.Toolkit.ActivateEventArgs args)
+    {
+        Play();
     }
 
     private void OnValidate()

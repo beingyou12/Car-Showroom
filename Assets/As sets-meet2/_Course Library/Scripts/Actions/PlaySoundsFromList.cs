@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -16,42 +16,56 @@ public class PlaySoundsFromList : MonoBehaviour
     private AudioSource audioSource = null;
     private int index = 0;
 
+    public int CurrentIndex => index;
+
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        EnsureAudioSource();
+    }
+
+    private void EnsureAudioSource()
+    {
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     public void NextClip()
     {
+        if (audioClips.Count == 0) return;
         index = ++index % audioClips.Count;
         PlayClip();
     }
 
     public void PreviousClip()
     {
+        if (audioClips.Count == 0) return;
         index = --index % audioClips.Count;
         PlayClip();
     }
 
     public void RandomClip()
     {
+        if (audioClips.Count == 0) return;
         index = Random.Range(0, audioClips.Count);
         PlayClip();
     }
 
     public void PlayAtIndex(int value)
     {
+        if (audioClips.Count == 0) return;
         index = Mathf.Clamp(value, 0, audioClips.Count);
         PlayClip();
     }
 
     public void PauseClip()
     {
+        EnsureAudioSource();
         audioSource.Pause();
     }
 
     public void StopClip()
     {
+        EnsureAudioSource();
         audioSource.Stop();
     }
 
@@ -62,7 +76,9 @@ public class PlaySoundsFromList : MonoBehaviour
 
     private void PlayClip()
     {
-        audioSource.clip = audioClips[Mathf.Abs(index)];
+        if (audioClips.Count == 0) return;
+        EnsureAudioSource();
+        audioSource.clip = audioClips[Mathf.Abs(index) % audioClips.Count];
         audioSource.Play();
     }
 
