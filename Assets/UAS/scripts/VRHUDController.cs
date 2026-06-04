@@ -41,30 +41,43 @@ public class VRHUDController : MonoBehaviour
 
     void Update()
     {
-        // 1. Handle the Toggle Button Press
+        // Handle the Toggle Button Press
         if (toggleButton.action != null && toggleButton.action.WasPressedThisFrame())
         {
             if (tipsUI != null)
             {
+                bool turningOn = !tipsUI.activeSelf;
+
                 // Flips the active state (if on, turn off. if off, turn on)
-                tipsUI.SetActive(!tipsUI.activeSelf);
+                tipsUI.SetActive(turningOn);
+
+                // When opening, place the panel once in front of the player and FREEZE it.
+                // A stationary panel is required so the player can reliably poke its buttons.
+                if (turningOn)
+                {
+                    PositionInFrontOfPlayer();
+                }
             }
         }
+    }
 
-        // 2. Handle the Smooth Follow Logic
-        if (playerCamera != null && tipsUI != null && tipsUI.activeSelf)
-        {
-            // Calculate the exact target position in the upper left
-            Vector3 targetPosition = playerCamera.position 
-                                   + (playerCamera.forward * forwardDistance) 
-                                   + (playerCamera.right * leftOffset) 
-                                   + (playerCamera.up * upOffset);
+    /// <summary>
+    /// Snaps the tutorial panel to a comfortable spot in front of the player's head and
+    /// faces it toward the camera. Called once on open; the panel then stays put so it can be poked.
+    /// </summary>
+    void PositionInFrontOfPlayer()
+    {
+        if (playerCamera == null || tipsUI == null)
+            return;
 
-            // Smoothly glide the Canvas to that position
-            tipsUI.transform.position = Vector3.Lerp(tipsUI.transform.position, targetPosition, Time.deltaTime * smoothSpeed);
+        Vector3 targetPosition = playerCamera.position
+                               + (playerCamera.forward * forwardDistance)
+                               + (playerCamera.right * leftOffset)
+                               + (playerCamera.up * upOffset);
 
-            // Make the Canvas rotate to face the same direction the camera is facing
-            tipsUI.transform.LookAt(tipsUI.transform.position + playerCamera.forward);
-        }
+        tipsUI.transform.position = targetPosition;
+
+        // Make the Canvas face the same direction the camera is looking.
+        tipsUI.transform.LookAt(tipsUI.transform.position + playerCamera.forward);
     }
 }
