@@ -2,9 +2,14 @@
 }
 
 .buttonstyle {
+    transition-property: all, ignored, all;
+    transition-duration: 0.5s, 0s, 0s;
+    transition-timing-function: ease, ease, ease;
+    transition-delay: 0s, 0s, 0s;
+    font-size: 80px;
+    color: rgb(255, 255, 255);
 }
 
-
-
 .buttonstyle:hover {
+    scale: 1.02 1.02;
 }
